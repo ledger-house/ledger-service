@@ -1,3 +1,31 @@
+server:
+  port: ${LEDGER_SERVICE_PORT:8082}
+
 spring:
   application:
     name: ledger-service
+
+  config:
+    import: optional:file:.env[.properties]
+
+  datasource:
+    url: ${LEDGER_DB_URL:jdbc:postgresql://localhost:5432/ledger_house?currentSchema=ledger}
+    username: ${LEDGER_DB_USERNAME:ledger_app}
+    password: ${LEDGER_DB_PASSWORD:ledger_local}
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    default-schema: ledger
+    schemas: ledger
+    create-schemas: false
+    validate-migration-naming: true
+
+  jooq:
+    sql-dialect: POSTGRES
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
