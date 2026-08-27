@@ -1,0 +1,2 @@
+-- SCRUM-7 baseline migration.
+-- The ledger schema is provisioned by ops and owned by ledger-service.
